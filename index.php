@@ -4,19 +4,20 @@ require_once("vendor/autoload.php");
 
 //preciso mudar isso
 require_once("vendor/hcodebr/php-classes/src/DB/Sql.php");
+require_once("vendor/hcodebr/php-classes/src/Page.php");
 //fim da gambs
 
-$app = new \Slim\Slim();
+use \Slim\Slim;
+
+$app = new Slim();
 
 $app->config('debug', true);
 
 $app->get('/', function() {
 
-	$sql = new Sql();
+  $page = new Page();
+  $page->setTpl("index");
 
-  $results = $sql->select("SELECT * FROM tb_users");
-
-  echo json_encode($results);
 });
 
 $app->run();
